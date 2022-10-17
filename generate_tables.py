@@ -18,8 +18,8 @@ def extract_path(file_name):
     file = tokens[1].split('/')
     return file[-1]
 
-def generate_tables(file_name):
-    df = pd.read_csv(file_name, sep='\t', on_bad_lines='skip')
+def generate_tables(file_name, rows):
+    df = pd.read_csv(file_name, sep='\t', on_bad_lines='skip', nrows=rows)
     df = df.rename(columns=
                    {'customer_id': 'user_id',
                     'review_headline': 'headline',
@@ -66,7 +66,7 @@ def generate_tables(file_name):
 
 def process_file(file_path):
     start = time.time()
-    generate_tables('./data/' + file_path)
+    generate_tables('./data/' + file_path, 50000)
     end = time.time()
     print('Processed', file_path, 'after', end-start, 'seconds')
 

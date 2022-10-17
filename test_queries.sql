@@ -1,1 +1,0 @@
-SELECT COUNT(*) FROM user INNER JOIN `gives a` ON user.`User ID` = `gives a`.`User ID` INNER JOIN review r on `gives a`.`Review ID` = r.`Review ID` WHERE r.`Star Rating` > 4
