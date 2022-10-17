@@ -71,13 +71,10 @@ def process_file(file_path):
     end = time.time()
     print('Processed', file_path, 'after', end-start, 'seconds')
 
-
 tsvs = os.listdir('./data')
 
 for tsv in tsvs:
     process_file(tsv)
-
-
 
 
 
