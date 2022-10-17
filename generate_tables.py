@@ -44,7 +44,8 @@ def generate_tables(file_name, rows):
 
     # create Review table
     review = df[['review_id', 'star_rating', 'helpful_votes', 'total_votes',
-                 'vine', 'verified_purchase', 'headline', 'body', 'date']]
+                 'vine', 'verified_purchase', 'headline', 'body',
+                 'date']].drop_duplicates()
     review.to_csv(path + '/review.tsv', sep='\t', index=False)
 
     # create Product table
