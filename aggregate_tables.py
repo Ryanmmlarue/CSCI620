@@ -25,13 +25,22 @@ for subdir in subdirs:
     review.append(pd.read_csv('./output/' + subdir + '/' + tables[4], sep="\t"))
     user.append(pd.read_csv('./output/' + subdir + '/' + tables[5], sep="\t"))
 
+print(len(buys))
 
-aggregate_buys = pd.concat(buys, axis=0).drop_duplicates()
+
+aggregate_buys = pd.concat(buys).drop_duplicates()
 aggregate_gives = pd.concat(gives, axis=0).drop_duplicates()
 aggregate_has = pd.concat(has, axis=0).drop_duplicates()
 aggregate_product = pd.concat(product, axis=0).drop_duplicates()
 aggregate_review = pd.concat(review, axis=0).drop_duplicates()
 aggregate_user = pd.concat(user, axis=0).drop_duplicates()
+
+print(aggregate_buys)
+print(aggregate_gives)
+print(aggregate_has)
+print(aggregate_product)
+print(aggregate_review)
+print(aggregate_user)
 
 aggregate_buys.to_csv('./agg/buys_a.tsv', sep='\t', index=False)
 aggregate_gives.to_csv('./agg/gives_a.tsv', sep='\t', index=False)
