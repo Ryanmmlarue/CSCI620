@@ -5,6 +5,7 @@ author: Ryan LaRue; rml5169
 import os
 import pandas as pd
 
+# find all split tables
 subdirs = os.listdir('./output')
 
 buys = []
@@ -14,6 +15,8 @@ product = []
 review = []
 user = []
 
+# for each of the tables in each subdirectory, append them to the master list
+# of that specific table
 for subdir in subdirs:
     tables = os.listdir('./output/' + subdir)
 
@@ -25,9 +28,8 @@ for subdir in subdirs:
     review.append(pd.read_csv('./output/' + subdir + '/' + tables[4], sep="\t"))
     user.append(pd.read_csv('./output/' + subdir + '/' + tables[5], sep="\t"))
 
-print(len(buys))
-
-
+# combine all of the individual tables for each table type, remove any
+# duplicates that are generated from combinations
 aggregate_buys = pd.concat(buys).drop_duplicates()
 aggregate_gives = pd.concat(gives, axis=0).drop_duplicates()
 aggregate_has = pd.concat(has, axis=0).drop_duplicates()
@@ -42,6 +44,8 @@ print(aggregate_product)
 print(aggregate_review)
 print(aggregate_user)
 
+# create master csvs - this combines all of the tables generated for each
+# indiviudal TSV into 6 master TSVs
 print('writing buys_a')
 aggregate_buys.to_csv('./agg/buys_a.tsv', sep='\t', index=False)
 print('writing gives_a')
