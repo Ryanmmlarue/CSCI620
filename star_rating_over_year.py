@@ -1,6 +1,7 @@
 """ 
 author: Ryan LaRue; rml5169
 """
+
 import mysql.connector as connection
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -11,18 +12,23 @@ from Project.credentials import ip, user, pwd, db_name
 try:
     # establish db connection
     db = connection.connect(host=ip, user=user, password=pwd, database=db_name)
-    query = "SELECT star_rating, count(star_rating) FROM review GROUP BY star_rating ORDER BY star_rating;"
+    query = "SELECT  MONTH(date), avg(star_rating) from review GROUP BY MONTH(date) ORDER BY MONTH(date);"
 
     # perform db query
     df = pd.read_sql(query, db)
 
+    print(df)
+
     # df.to_csv('output.csv')
 
-    plt.bar(df['star_rating'], df['count(star_rating)'], width=0.4)
+    months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug',
+              'Sept', 'Oct', 'Nov', 'Dec']
+    plt.plot(months, df['avg(star_rating)'])
 
-    plt.xlabel("Star Rating")
-    plt.ylabel("Number of Instances")
-    plt.title("Star Rating Distribution")
+    plt.xlabel("Month of the Year (Numeric)")
+    plt.ylabel("Average Star Rating")
+    plt.title("Month of the Year vs Average Star Rating")
+    # plt.xticks(1)
     plt.show()
 
 # close the connection at the end or if something goes wrong

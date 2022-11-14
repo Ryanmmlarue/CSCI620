@@ -7,10 +7,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-ip = "172.29.224.1"
-user = "CSCI620"
-pwd = "CSCI620"
-db_name = 'amazon_reviews'
+from Project.credentials import ip, user, pwd, db_name
 
 try:
     # establish db connection
