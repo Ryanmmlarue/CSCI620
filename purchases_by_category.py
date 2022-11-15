@@ -1,3 +1,7 @@
+""" 
+author: Ryan Jiau; rsj7519
+"""
+
 import mysql.connector
 import matplotlib.pyplot as plt
 import matplotlib.colors as mcolors
