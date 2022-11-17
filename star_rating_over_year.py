@@ -17,8 +17,6 @@ try:
     # perform db query
     df = pd.read_sql(query, db)
 
-    print(df)
-
     # df.to_csv('output.csv')
 
     months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug',
