@@ -20,6 +20,13 @@ count = []
 for line in cursor:
     year.append(int(line[0]))
     count.append(line[1])
+    
+year.insert(1, 2006)
+count.insert(1, 0)
+year.insert(2, 2007)
+count.insert(2, 0)
+year.insert(5, 2010)
+count.insert(5, 0)
 
 plt.plot(year, count)
 plt.xticks(np.arange(2005, 2015+1, step=1))
