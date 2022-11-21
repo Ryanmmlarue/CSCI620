@@ -7,7 +7,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-from Project.credentials import ip, user, pwd, db_name
+from credentials import ip, user, pwd, db_name
 
 try:
     # establish db connection

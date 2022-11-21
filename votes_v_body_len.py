@@ -7,31 +7,32 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-from Project.credentials import ip, user, pwd, db_name
+from credentials import ip, user, pwd, db_name
 
 try:
     # establish db connection
     db = connection.connect(host=ip, user=user, password=pwd, database=db_name)
-    query = "SELECT helpful_votes, avg(length(body)) as avg_length FROM " \
+    query = "SELECT helpful_votes, length(body) as length FROM " \
         "review GROUP BY helpful_votes;"
 
     # perform db query
     df = pd.read_sql(query, db)
+    df.dropna(inplace=True)
     print(df)
 
     # df.to_csv('output.csv')
 
     # get regression line
-    m, b = np.polyfit(df['helpful_votes'], df['avg_length'], 1)
+    m, b = np.polyfit(df['length'], df['helpful_votes'] , 1)
 
     # plot data
-    plt.scatter(df['helpful_votes'], df['avg_length'], s=5)
-    plt.plot(df['helpful_votes'], m * df['helpful_votes'] + b, color='red')
+    plt.scatter(df['length'], df['helpful_votes'], s=5)
+    plt.plot(df['length'], m * df['length'] + b, color='red')
 
     # add plot labels and display
-    plt.xlabel("Helpful Votes Count")
-    plt.ylabel("Average Review Length")
-    plt.title("Helpful Votes Count vs Average Review Length")
+    plt.ylabel("Helpful Votes Count")
+    plt.xlabel("Review Length")
+    plt.title("Review Length vs Helpful Votes Count")
     plt.show()
 
 # close the connection at the end or if something goes wrong
